@@ -2,7 +2,14 @@ import styled from "styled-components"
 
 export const FormContainer = styled.div
 `
-    border: 1px solid red
+    border: 2px solid gold
     width: 400px
-    text-align: center
+    height: 300px
+    border-radius: 5%
+ 
+`
+export const Container = styled.div
+`
+
+
 `

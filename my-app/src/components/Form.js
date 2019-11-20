@@ -1,5 +1,6 @@
 import React from "react"
 import {FormContainer} from "../styles/styles.js"
+import '../App.css';
 
 const Form = (props)=>{
     const {state, dispatch} = props

@@ -1,11 +1,15 @@
 import React, {useReducer} from "react"
 import {initialState, reducer} from "../reducers/index.js"
 import Form from "./Form"
+import {Container} from "../styles/styles.js"
+
+
 
 const TodoList = ()=>{
     const [state, dispatch] = useReducer(reducer, initialState)
     return (
         <div>
+            <Container className='container'>
             <Form state={state} dispatch={dispatch} />
             {state.todoList.map(listItem => {
                 return (
@@ -30,9 +34,10 @@ const TodoList = ()=>{
                     </div>
                 )
             })}
-            <button onClick={()=>dispatch({
+            <button className='clearAll' onClick={()=>dispatch({
                 type: 'CLEAR_COMPLETED'
             })}>Clear all completed</button>
+            </Container>
         </div>
    
     )

@@ -20,3 +20,28 @@
 .App-link {
   color: #09d3ac;
 }
+ .clearAll{
+   width: 150px;
+  height: 30px;
+  border-radius: 5%;
+  border: 1.5px solid peru;
+  background: none;
+  float: center;
+  cursor: pointer;
+ }
+ .container{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+   padding:30px;
+   align-items: center;
+ }
+ .form-container{
+   padding:10px;
+   display:flex;
+   flex-direction: column;
+   justify-content: center;
+ }
+ .form{
+   padding: 20px;
+ }
