@@ -1,7 +1,9 @@
 // add a reducer file and build out a reducer with a default return. Build your initial State object and export both the initial State and reducer.
 export const initialState = {
     listItem: '',
-    todoList: []
+    todoList: [],
+    completed: false,
+    id: Date()
 }
 
 export const reducer=(state, action) =>{
@@ -24,21 +26,21 @@ export const reducer=(state, action) =>{
             todoList: newList
           }
       case 'REMOVE_ITEM':
-          const newStateRemove = state.todoList.filter(ele => ele.id!==action.id)
+          const newStateRemove = state.todoList.filter( item => item.id!==action.id)
           return {
               ...state,
               todoList: newStateRemove
           }
       case 'COMPLETE_ITEM':
           const newStateCompleted= state.todoList.map(
-            el =>`${el.id}`===`${action.id}` ? {...el, completed: !el.completed} : el
+            item =>`${item.id}`===`${action.id}` ? {...item, completed: !item.completed} : item
           )
           return {
             ...state,
             todoList: newStateCompleted
           }
       case 'CLEAR_COMPLETED':
-          const newStateClear=state.todoList.filter(ele=> !ele.completed)
+          const newStateClear=state.todoList.filter(item=> !item.completed)
           return {
             ...state,
             todoList: newStateClear
