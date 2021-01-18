@@ -1,20 +1,30 @@
-export const initialState = {
-    item: 'Learn about reducers',
-    completed: false,
-    id: 3892987589 
-}
-
+import { SET_CLEAR, SET_NEW_TODO, SET_COMPLETED, SET_CURRENT_TEXT } from './Actions';
 
 const reducer = (state, action) =>{
-    switch(action.type){
-        case('SET_ITEM'):
-            return({...state, item:action.payload})
-        case('ADD_TODO'):
-             return({...state, initialState:[...state.initialState, {item:action.payload, completed:false, id :Math.round(Math.random()*1000)}]})
-
+    switch(action.type) {
+        case(SET_NEW_TODO):
+            const newTodo = {item: action.payload, completed: false, id: new Date()};
+            return({...state, list:[...state.list, newTodo]});
+        case(SET_COMPLETED):
+            console.log('complete')
+            const updatedList = state.list.map((item) => {
+                if(item.id === action.payload) {
+                    return {...item, completed: !item.completed};
+                } else {
+                    return item;
+                }
+            })
+            return({...state, list:updatedList});
+        case(SET_CLEAR):
+            const clearedList = state.list.filter((item) => {
+                return(!item.completed)
+            })
+            return({...state, list:clearedList});
+        case(SET_CURRENT_TEXT):
+            return({...state, currentText:action.payload})
         default:
-            return(state)
     }
 }
 
 export default reducer;
+

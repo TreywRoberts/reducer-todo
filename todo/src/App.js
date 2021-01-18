@@ -1,33 +1,57 @@
-import './App.css';
-import React, {useReducer} from 'react'
-import reducer, {initialState} from './reducer/reducer'
-import {setItem, addTodo, setNewTitleText} from './reducer/Actions'
-// import TodoForm from './components/newTodo'
+import React, { useState, useReducer } from 'react';
+import './App.css'
+import reducer from './reducer/reducer';
+import { setNewTodo, setCompleted, setCurrentText, setClear } from './reducer/Actions';
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
 
+const App = () => {
 
-function App() {
-  const [state, dispatch] = useReducer(reducer, initialState)
-  console.log(state)
+  const testArray = [{
+    item: 'Learn about reducers',
+    completed: false,
+    id: 3892987589
+  },
+  {
+    item: 'Wash your face',
+    completed: false,
+    id: 3892987590
+  },
+  {
+    item: 'Eat Tamales',
+    completed: false,
+    id: 3892987591
+  }]
 
-  const handleChanges = e =>{
-    dispatch(setItem(e.target.value))
-    console.log(e.target.value)
+  const initialState = {
+    list: testArray,
+    currentText: ''
   }
 
-  return (
-    <div className="App">
-      <header>
-        TO DO LIST
-      </header>
-      <form onSubmit={handleChanges} type='text' name='item'>
-        <input type='text' name='item' value={state.setItem} onChange={handleChanges}  />
-        <button onClick={()=>{
-          dispatch(setItem(state.setItem));
-        }}>NEW TASK</button>
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-      </form>
+  const handleToggleItem = (id) => {
+    dispatch(setCompleted(id))
+  }
+
+  const handleAddItem = (task) => {
+    dispatch(setNewTodo(task));
+  }
+
+  const handleChanges = (e) => {
+    dispatch(setCurrentText(e.target.value))
+  }
+
+  const handleClearTasks = () => {
+    dispatch(setClear());
+  }
+
+  return(
+    <div className='App'>
+      <TodoForm handleAddItem={handleAddItem} state={state} handleChanges={handleChanges} handleClearTasks={handleClearTasks}/>
+      <TodoList todoList={state.list} handleToggleItem={handleToggleItem}/>
     </div>
-  );
-}
+
+)}
 
 export default App;
